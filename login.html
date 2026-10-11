@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PressStart - Iniciar Sessão</title>
+    <style>
+        :root {
+            --win95-gray: #c0c0c0;
+            --win95-dark-gray: #808080;
+            --win95-blue: #000080;
+            --win95-light-blue: #1084d0;
+            --win95-window-bg: #ece9d8;
+            --win95-text: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #008080; /* Fundo clássico verde-água do Windows 95 */
+            color: var(--win95-text);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Janela Estilo Windows 95 */
+        .window {
+            background-color: var(--win95-gray);
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid var(--win95-dark-gray);
+            border-bottom: 2px solid var(--win95-dark-gray);
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .title-bar {
+            background: linear-gradient(90deg, var(--win95-blue), var(--win95-light-blue));
+            color: white;
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .title-bar-controls button {
+            background-color: var(--win95-gray);
+            border-top: 1px solid #ffffff;
+            border-left: 1px solid #ffffff;
+            border-right: 1px solid var(--win95-dark-gray);
+            border-bottom: 1px solid var(--win95-dark-gray);
+            width: 16px;
+            height: 16px;
+            font-size: 9px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .window-body {
+            padding: 20px;
+            background-color: var(--win95-window-bg);
+            border-top: 1px solid var(--win95-dark-gray);
+            border-left: 1px solid var(--win95-dark-gray);
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            margin: 6px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 6px;
+            background-color: #ffffff;
+            border: 1px inset var(--win95-dark-gray);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-win95 {
+            flex: 1;
+            background-color: var(--win95-gray);
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid var(--win95-dark-gray);
+            border-bottom: 2px solid var(--win95-dark-gray);
+            padding: 6px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-win95:active {
+            border-top: 2px solid var(--win95-dark-gray);
+            border-left: 2px solid var(--win95-dark-gray);
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            padding-top: 7px;
+            padding-left: 7px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="window">
+        <div class="title-bar">
+            <span>PressStart.exe - Autenticação</span>
+            <div class="title-bar-controls">
+                <button onclick="alert('A sair...')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <form onsubmit="event.preventDefault(); alert('Sessão iniciada com sucesso!');">
+                <div class="form-group">
+                    <label for="username">Nome de Utilizador:</label>
+                    <input type="text" id="username" placeholder="ex: sosuya" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Palavra-passe:</label>
+                    <input type="password" id="password" placeholder="********" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn-win95">Entrar</button>
+                    <button type="button" class="btn-win95" onclick="alert('Módulo de registo indisponível no momento.')">Registar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
