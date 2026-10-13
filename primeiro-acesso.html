@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PressStart - Assistente de Primeiro Acesso</title>
+    <style>
+        :root {
+            --win95-gray: #c0c0c0;
+            --win95-dark-gray: #808080;
+            --win95-blue: #000080;
+            --win95-light-blue: #1084d0;
+            --win95-window-bg: #ece9d8;
+            --win95-text: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #008080; /* Fundo clássico verde-água do Windows 95 */
+            color: var(--win95-text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Janela Estilo Windows 95 */
+        .window {
+            background-color: var(--win95-gray);
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid var(--win95-dark-gray);
+            border-bottom: 2px solid var(--win95-dark-gray);
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.6);
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .title-bar {
+            background: linear-gradient(90deg, var(--win95-blue), var(--win95-light-blue));
+            color: white;
+            padding: 4px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .title-bar-controls button {
+            background-color: var(--win95-gray);
+            border-top: 1px solid #ffffff;
+            border-left: 1px solid #ffffff;
+            border-right: 1px solid var(--win95-dark-gray);
+            border-bottom: 1px solid var(--win95-dark-gray);
+            width: 16px;
+            height: 16px;
+            font-size: 9px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .window-body {
+            padding: 16px 20px;
+            background-color: var(--win95-window-bg);
+            border-top: 1px solid var(--win95-dark-gray);
+            border-left: 1px solid var(--win95-dark-gray);
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            margin: 6px;
+        }
+
+        h2 {
+            font-size: 1rem;
+            color: var(--win95-blue);
+            margin-bottom: 8px;
+            border-bottom: 1px dashed var(--win95-dark-gray);
+            padding-bottom: 4px;
+        }
+
+        p {
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        label {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+            padding: 6px;
+            background-color: #ffffff;
+            border: 1px inset var(--win95-dark-gray);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            width: 100%;
+        }
+
+        input:focus {
+            outline: 1px dotted var(--win95-blue);
+            background-color: #fffff0; /* Leve tom amarelo clássico ao focar */
+        }
+
+        .strength-indicator {
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            justify-content: flex-end;
+        }
+
+        .btn-win95 {
+            min-width: 90px;
+            background-color: var(--win95-gray);
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid var(--win95-dark-gray);
+            border-bottom: 2px solid var(--win95-dark-gray);
+            padding: 6px 12px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .btn-win95:active {
+            border-top: 2px solid var(--win95-dark-gray);
+            border-left: 2px solid var(--win95-dark-gray);
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+            padding-top: 7px;
+            padding-left: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="window">
+        <div class="title-bar">
+            <span>PressStart.exe - Assistente de Configuração</span>
+            <div class="title-bar-controls">
+                <button onclick="alert('A cancelar configuração...')">X</button>
+            </div>
+        </div>
+        <div class="window-body">
+            <h2>Bem-vindo ao PressStart!</h2>
+            <p>Notamos que é o seu primeiro acesso. Preencha os campos abaixo para configurar a sua conta de utilizador.</p>
+
+            <form id="registerForm" onsubmit="validarFormulario(event)">
+                <div class="form-group">
+                    <label for="new-user">Nome de Utilizador (Gamertag):</label>
+                    <input type="text" id="new-user" placeholder="ex: sosuya" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="new-email">Correio Eletrónico (E-mail):</label>
+                    <input type="email" id="new-email" placeholder="teu.email@dominio.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Idade:</label>
+                    <input type="number" id="age" min="1" max="120" placeholder="ex: 20" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="new-pass">Palavra-passe:</label>
+                    <input type="password" id="new-pass" placeholder="********" oninput="verificarForcaSenha()" required>
+                    <div id="strengthText" class="strength-indicator" style="color: #666;">Força da palavra-passe: -</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-pass">Confirme a Palavra-passe:</label>
+                    <input type="password" id="confirm-pass" placeholder="********" required>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn-win95" onclick="window.location.href='login.html'">Voltar</button>
+                    <button type="submit" class="btn-win95" style="font-weight: bold; color: var(--win95-blue);">Concluir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function verificarForcaSenha() {
+            const senha = document.getElementById('new-pass').value;
+            const indicator = document.getElementById('strengthText');
+            
+            if (senha.length === 0) {
+                indicator.textContent = "Força da palavra-passe: -";
+                indicator.style.color = "#666";
+                return;
+            }
+
+            if (senha.length < 6) {
+                indicator.textContent = "Força da palavra-passe: Fraca";
+                indicator.style.color = "#b00020";
+            } else if (senha.length < 10 || !/[A-Z]/.test(senha) || !/[0-9]/.test(senha)) {
+                indicator.textContent = "Força da palavra-passe: Média";
+                indicator.style.color = "#b58900";
+            } else {
+                indicator.textContent = "Força da palavra-passe: Forte";
+                indicator.style.color = "#007a00";
+            }
+        }
+
+        function validarFormulario(event) {
+            event.preventDefault();
+            
+            const senha = document.getElementById('new-pass').value;
+            const confirmaSenha = document.getElementById('confirm-pass').value;
+            const idade = parseInt(document.getElementById('age').value);
+
+            if (idade < 1 || idade > 120) {
+                alert('Erro: Por favor, insira uma idade válida.');
+                return;
+            }
+
+            if (senha !== confirmaSenha) {
+                alert('Erro: As palavras-passe não coincidem. Por favor, verifique.');
+                return;
+            }
+
+            alert('Conta criada com sucesso! A iniciar sessão...');
+        }
+    </script>
+
+</body>
+</html>
